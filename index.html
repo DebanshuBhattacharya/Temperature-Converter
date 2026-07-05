@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>GSAP Reveal Example</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #111;
+        color: white;
+        font-family: Arial, sans-serif;
+      }
+
+      section {
+        min-height: 100vh;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+      }
+
+      .about {
+        width: 90%;
+        max-width: 1200px;
+      }
+
+      .about-grid {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 80px;
+      }
+
+      .about-heading {
+        font-size: 70px;
+
+        line-height: 1;
+      }
+
+      .about-heading em {
+        color: #888;
+      }
+
+      .about-body {
+        font-size: 22px;
+
+        line-height: 1.6;
+
+        color: #aaa;
+      }
+
+      .about-divider {
+        height: 2px;
+
+        background: white;
+
+        margin-top: 80px;
+
+        transform-origin: left;
+      }
+
+      /* initial states */
+
+      .reveal-text {
+        opacity: 0;
+
+        transform: translateY(40px);
+      }
+
+      .reveal-fade {
+        opacity: 0;
+
+        transform: translateY(30px);
+      }
+
+      .reveal-line {
+        transform: scaleX(0);
+      }
+
+      @media (max-width: 800px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .about-heading {
+          font-size: 50px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- extra space to test scroll -->
+
+    <div style="height: 100vh"></div>
+
+    <section class="about">
+      <div>
+        <div class="about-grid">
+          <div class="about-left">
+            <h2 class="about-heading reveal-text">
+              The person<br />
+
+              <em>behind the code.</em>
+            </h2>
+          </div>
+
+          <div class="about-right">
+            <p class="about-body reveal-fade">
+              I'm <strong>Debanshu.</strong> A frontend developer learner and
+              coding enthusiast who enjoys transforming ideas into interactive
+              digital experiences.
+            </p>
+
+            <p class="about-body reveal-fade" style="margin-top: 1.5rem">
+              My goal is to create websites that are not only functional but
+              also intuitive, responsive, and enjoyable to use.
+            </p>
+          </div>
+        </div>
+
+        <div class="about-divider reveal-line"></div>
+      </div>
+    </section>
+
+    <!-- GSAP -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      // heading
+
+      gsap.utils.toArray(".reveal-text").forEach((el) => {
+        gsap.fromTo(
+          el,
+
+          {
+            opacity: 0,
+
+            y: 40,
+          },
+
+          {
+            opacity: 1,
+
+            y: 0,
+
+            duration: 1.1,
+
+            ease: "power4.out",
+
+            scrollTrigger: {
+              trigger: el,
+
+              start: "top 85%",
+
+              toggleActions: "play none none none",
+            },
+          },
+        );
+      });
+
+      // paragraphs
+
+      gsap.utils.toArray(".reveal-fade").forEach((el) => {
+        gsap.fromTo(
+          el,
+
+          {
+            opacity: 0,
+
+            y: 30,
+          },
+
+          {
+            opacity: 1,
+
+            y: 0,
+
+            duration: 1,
+
+            ease: "power3.out",
+
+            scrollTrigger: {
+              trigger: el,
+
+              start: "top 85%",
+
+              toggleActions: "play none none none",
+            },
+          },
+        );
+      });
+
+      // divider
+
+      gsap.fromTo(
+        ".reveal-line",
+
+        {
+          scaleX: 0,
+        },
+
+        {
+          scaleX: 1,
+
+          duration: 1.2,
+
+          ease: "power4.out",
+
+          scrollTrigger: {
+            trigger: ".reveal-line",
+
+            start: "top 90%",
+          },
+        },
+      );
+    </script>
+  </body>
+</html>
