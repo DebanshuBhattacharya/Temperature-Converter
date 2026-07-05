@@ -70,7 +70,7 @@ This project uses **GSAP** to create:
 
 **Debanshu Bhattacharya**
 
-GitHub: https://github.com/your-username
+GitHub: [https://github.com/your-username](https://github.com/DebanshuBhattacharya)
 
 ---
 
